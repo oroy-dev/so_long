@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:38:19 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/16 17:31:59 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/18 15:24:36 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
 
 typedef struct s_data
 {
-	int			numtex;	
+	t_list		*lastpos;
+	int			lastinst;
+	int			numtex;
 	int			width;
 	int			height;
 	int			move_px;
-	int			char_layer;
+	int			lastlayer;
 	int			collect_count;
 	int			collect_onscreen;
 	int			pos_x;
 	int			pos_y;
-	int			ext[2];
 	char		**map;
 	mlx_t		*mlx;
 	mlx_image_t	**img;
@@ -36,12 +37,14 @@ typedef struct s_data
 }	t_data;
 
 t_data	*g(void);
-int		display_images(mlx_t *mlx, mlx_image_t *img[4], char **tab);
+int		display_images(mlx_t *mlx, char **tab);
 void	error(void);
 int		get_height(void);
 int		get_width(void);
+void	key_hooks(mlx_key_data_t keydata, void* param);
 void	load_images(void);
 void	malloc_check(void *maloc);
 void	read_map(char *file);
+void	update_pos(char key);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:08:42 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/16 17:28:06 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/18 19:53:23 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@ static char	*get_tex_path(int i)
 	if (i == 1)
 		return ("./ressources/test/tile_mountain.png");
 	else if (i == 2)
-		return ("./ressources/test/collectible.png");
+		return ("./ressources/test/red_light.png");
 	else if (i == 3)
-		return ("./ressources/test/char_front.png");
+		return ("./ressources/train/train_f.png");
 	else if (i == 4)
-		return ("./ressources/test/char_back.png");
+		return ("./ressources/train/train_b.png");
 	else if (i == 5)
-		return ("./ressources/test/char_right.png");
+		return ("./ressources/train/train_r.png");
 	else if (i == 6)
-		return ("./ressources/test/char_left.png");
+		return ("./ressources/train/train_l.png");
 	else if (i == 7)
+		return ("./ressources/train/wagon_hori.png");
+	else if (i == 8)
+		return ("./ressources/train/wagon_vert.png");
+	else if (i == 9)
 		return ("./ressources/test/exit.png");
 	else
 		return ("./ressources/test/tile_grass.png");
