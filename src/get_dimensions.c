@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:43:28 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/16 15:59:45 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/19 18:05:00 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	get_height(void)
 {
-	g()->height *= g()->move_px;
+	g()->height *= g()->px;
 	return (g()->height);
 }
 
 int	get_width(void)
 {
-	g()->width = ft_strlen(g()->map[0]) * g()->move_px;
+	g()->width = ft_strlen(g()->map[0]) * g()->px;
 	return (g()->width);
 }

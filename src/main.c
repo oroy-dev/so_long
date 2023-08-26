@@ -6,118 +6,68 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:42:12 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/16 17:36:36 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/25 22:34:37 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	error(void)
+t_data	*g(void)
 {
-	ft_putstr_fd((char *)mlx_strerror(mlx_errno), 2);
-	exit (EXIT_FAILURE);
+	static t_data	ptr;
+
+	if (!ptr.px)
+	{
+		ptr.player_on = 0;
+		ptr.exit_on = 0;
+		ptr.currentdir = 'S';
+		ptr.movetotal = 0;
+		ptr.px = 64;
+		ptr.numtex = 13;
+		ptr.width = 0;
+		ptr.height = 0;
+		ptr.collectibles = 0;
+		ptr.collect_count = 0;
+		ptr.collect_onscreen = 0;
+		ptr.exitgood = 0;
+		ptr.x = 0;
+		ptr.y = 0;
+		ptr.map = NULL;
+		ptr.mlx = NULL;
+		ptr.img = NULL;
+	}
+	return (&ptr);
 }
 
-void	change_direction(mlx_image_t *img, char key)
+static void	init_character(int x, int y)
 {
-	if (g()->lastkey != key)
-	{
-		g()->current_char->instances[0].enabled = false;
-		if (!img->instances)
-			mlx_image_to_window(g()->mlx, img, g()->pos_x * g()->move_px, g()->pos_y * g()->move_px);
-		else
-			img->instances[0].enabled = true;
-		g()->current_char = img;
-		g()->lastkey = key;
-	}
-	img->instances[0].x = g()->pos_x * g()->move_px;
-	img->instances[0].y = g()->pos_y * g()->move_px;
-}
-
-void	update_pos(char key)
-{
-	int	i;
-
-	i = 0;
-	if (key == 'W')
-		change_direction(g()->img[4], key);
-	else if (key == 'S')
-		change_direction(g()->img[3], key);
-	else if (key == 'D')
-		change_direction(g()->img[5], key);
-	else if (key == 'A')
-		change_direction(g()->img[6], key);
-	if (g()->map[g()->pos_y][g()->pos_x] == 'C')
-	{
-		while (i < g()->collect_count)
-		{
-			if (g()->img[2]->instances[i].x == g()->pos_x * g()->move_px
-				&& g()->img[2]->instances[i].y == g()->pos_y * g()->move_px)
-			{
-				g()->img[2]->instances[i].enabled = false;
-				g()->map[g()->pos_y][g()->pos_x] = '0';
-				g()->collect_onscreen--;
-			}
-			i++;
-		}
-		if (g()->collect_onscreen == 0)
-			mlx_image_to_window(g()->mlx, g()->img[7], g()->ext[0] * g()->move_px, g()->ext[1] * g()->move_px);
-	}
-	else if (g()->map[g()->pos_y][g()->pos_x] == 'E' && !g()->collect_onscreen)
-	{
-		printf ("You won!");
-		exit (EXIT_SUCCESS);
-	}
-}
-
-void	key_hooks(mlx_key_data_t keydata, void* param)
-{
-	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP) && keydata.action == MLX_PRESS
-		&& g()->map[g()->pos_y - 1][g()->pos_x] != '1')
-	{
-		g()->pos_y--;
-		update_pos('W');
-	}
-	else if ((keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN) && keydata.action == MLX_PRESS
-		&& g()->map[g()->pos_y + 1][g()->pos_x] != '1')
-	{
-		g()->pos_y++;
-		update_pos('S');
-	}
-	else if ((keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT) && keydata.action == MLX_PRESS
-		&& g()->map[g()->pos_y][g()->pos_x + 1] != '1')
-	{
-		g()->pos_x++;
-		update_pos('D');
-	}
-	else if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT) && keydata.action == MLX_PRESS
-		&& g()->map[g()->pos_y][g()->pos_x - 1] != '1')
-	{
-		g()->pos_x--;
-		update_pos('A');
-	}
-	(void) param;
-	// *(int *)param += 1;
-	// printf ("%i\n", *(int *)param);
+	mlx_image_to_window(g()->mlx, g()->img[3], x, y);
+	mlx_image_to_window(g()->mlx, g()->img[4], x, y);
+	mlx_image_to_window(g()->mlx, g()->img[5], x, y);
+	mlx_image_to_window(g()->mlx, g()->img[6], x, y);
+	g()->img[4]->instances[0].enabled = false;
+	g()->img[5]->instances[0].enabled = false;
+	g()->img[6]->instances[0].enabled = false;
 }
 
 int	main(int argc, char **argv)
 {
-	int	character_layer;
-
 	if (argc != 2)
 	{
-		ft_putstr_fd("Error\n Make sure to have 2 arguments precisely.\n", 2);
+		ft_putstr_fd("Error\nMake sure to have 2 arguments precisely.\n", 2);
 		exit (EXIT_FAILURE);
 	}
 	read_map(argv[1]);
-	g()->mlx = mlx_init(get_width(), get_height(), "so_long", false);
+	check_map_eligibility(g()->map);
+	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
+	g()->mlx = mlx_init(get_width(), get_height(), "so_long", true);
 	if (!g()->mlx)
 		error();
 	load_images();
-	character_layer = display_images(g()->mlx, g()->img, g()->map);
-	mlx_set_instance_depth(g()->img[3]->instances, character_layer);
-	mlx_key_hook(g()->mlx, &key_hooks, NULL);
+	display_images(g()->mlx, g()->map);
+	init_character(g()->x * g()->px, g()->y * g()->px);
+	mlx_loop_hook(g()->mlx, loop_hook, g()->mlx);
+	mlx_key_hook(g()->mlx, &key_hooks, g()->mlx);
 	mlx_loop(g()->mlx);
 	mlx_terminate(g()->mlx);
 	return (0);
