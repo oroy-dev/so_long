@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:17:53 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/26 22:43:34 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/28 13:29:59 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,25 @@ static void	file_to_tab(int fd)
 
 void	read_map(char *file)
 {
-	int	fd;
+	char	*path;
+	int		fd;
 
-	fd = open (file, O_RDONLY);
+	path = ft_strjoin("./map/", file);
+	if (!path)
+	{
+		ft_putendl_fd("Error\nMalloc failed", 2);
+		exit (EXIT_FAILURE);
+	}
+	fd = open (path, O_RDONLY);
 	if (fd == -1)
 	{
-		perror ("Error\n");
-		exit (EXIT_FAILURE);
+		ft_free(path);
+		fd = open (file, O_RDONLY);
+		if (fd == -1)
+		{
+			perror ("Error");
+			exit (EXIT_FAILURE);
+		}
 	}
 	file_to_tab(fd);
 	close (fd);

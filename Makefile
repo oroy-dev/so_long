@@ -6,7 +6,7 @@
 #    By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 18:36:54 by oroy              #+#    #+#              #
-#    Updated: 2023/08/26 22:52:00 by oroy             ###   ########.fr        #
+#    Updated: 2023/08/28 13:47:00 by oroy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ LIBFT := ./lib/libft
 LIBFT_AR := $(LIBFT)/libft.a
 
 LIBMLX := ./lib/MLX42
-LIBMLX_AR := $(LIBMLX)/build/libmlx42.a -ldl $(GLFW) -pthread -lm
+LIBMLX_AR := $(LIBMLX)/build/libmlx42.a
+LIBMLX_FLAGS := -ldl $(GLFW) -pthread -lm
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
 
@@ -37,20 +38,20 @@ MK_C := $(MAKE) -C
 
 # *********************************** RULES ********************************** #
 
-all: libmlx libft $(NAME)
+all: $(LIBMLX_AR) $(LIBFT_AR) $(NAME)
 	@echo "-- Project executable created --"
 
-libmlx:
+$(LIBMLX_AR):
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && $(MK_C) $(LIBMLX)/build -j4
 
-libft:
+$(LIBFT_AR):
 	@$(MK_C) $(LIBFT)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(OBJ) $(LIBMLX_AR) $(LIBFT_AR) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBMLX_AR) $(LIBMLX_FLAGS) $(LIBFT_AR) $(HEADERS) -o $(NAME)
 
 $(OBJ_DIR):
 	@mkdir $@
@@ -70,7 +71,7 @@ re: fclean all
 
 # VALGRIND #
 
-PARAM = map/test.ber
+PARAM = ./map/test.ber
 
 val: $(NAME)
 	valgrind --leak-check=full \

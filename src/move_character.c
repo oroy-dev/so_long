@@ -6,13 +6,13 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 20:31:40 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/26 22:46:30 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/28 13:34:23 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	check_for_item_hit()
+static void	check_for_item_hit(void)
 {
 	int	i;
 
@@ -68,10 +68,10 @@ static mlx_image_t	*get_character_dir(char key)
 void	move_character(char key, int x, int y, int pos)
 {
 	int	px;
-	
+
 	(void) pos;
 	px = td()->px;
-	td()->map[y][x] = 'Q';
+	td()->map[y][x] = '1';
 	if (key == 'W' || key == 'S')
 		mlx_image_to_window(td()->mlx, ti()->wagon_v, x * px, y * px);
 	else
