@@ -6,7 +6,7 @@
 #    By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 18:36:54 by oroy              #+#    #+#              #
-#    Updated: 2023/08/28 13:47:00 by oroy             ###   ########.fr        #
+#    Updated: 2023/08/30 11:26:18 by oroy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,9 +69,11 @@ re: fclean all
 
 .PHONY: all, clean, fclean, re, libmlx, libft
 
+bonus: 
+
 # VALGRIND #
 
-PARAM = ./map/test.ber
+PARAM = test.ber
 
 val: $(NAME)
 	valgrind --leak-check=full \

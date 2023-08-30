@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 20:31:40 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/28 13:34:23 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/28 14:07:55 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,18 @@ static mlx_image_t	*get_character_dir(char key)
 		return (ti()->train_f);
 }
 
-void	move_character(char key, int x, int y, int pos)
+void	move_character(char key)
 {
-	int	px;
+	// int	px;
 
-	(void) pos;
-	px = td()->px;
-	td()->map[y][x] = '1';
-	if (key == 'W' || key == 'S')
-		mlx_image_to_window(td()->mlx, ti()->wagon_v, x * px, y * px);
-	else
-		mlx_image_to_window(td()->mlx, ti()->wagon_h, x * px, y * px);
-	ft_printf ("%i\n", ++td()->movetotal);
+	// (void) pos;
+	// px = td()->px;
+	// td()->map[y][x] = '1';
+	// if (key == 'W' || key == 'S')
+	// 	mlx_image_to_window(td()->mlx, ti()->wagon_v, x * px, y * px);
+	// else
+	// 	mlx_image_to_window(td()->mlx, ti()->wagon_h, x * px, y * px);
+	// ft_printf ("%i\n", ++td()->movetotal);
 	update_pos(get_character_dir(key));
 	check_for_item_hit();
 }

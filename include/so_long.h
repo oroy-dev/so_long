@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:38:19 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/26 22:36:45 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/28 14:10:24 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ void	flood_fill(void);
 int		get_height(void);
 int		get_width(void);
 void	key_hooks(mlx_key_data_t keydata, void* param);
+void	key_hooks_bonus(mlx_key_data_t keydata, void *param);
 void	load_images(void);
 void	loop_hook(void* param);
 void	malloc_check(void *ptr);
 void	mlx_error_check(void *ptr);
-void	move_character(char key, int x, int y, int pos);
+void	move_character(char key);
 void	print_error(char *msg);
 void	read_map(char *file);
 void	start_flooding(char **map, int x, int y);

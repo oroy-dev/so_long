@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:42:12 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/30 11:23:08 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/28 14:14:04 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 	display_images(td()->map, td()->px);
 	init_character(td()->x * td()->px, td()->y * td()->px);
 	mlx_loop_hook(td()->mlx, loop_hook, td()->mlx);
-	mlx_key_hook(td()->mlx, &key_hooks, td()->mlx);
+	mlx_key_hook(td()->mlx, &key_hooks_bonus, td()->mlx);
 	mlx_loop(td()->mlx);
 	mlx_terminate(td()->mlx);
 	ft_free_tab(td()->map);
