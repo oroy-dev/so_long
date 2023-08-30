@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 13:47:29 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/28 13:54:52 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 15:33:45 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	fill_square(char **map, int x, int y)
 {
 	if (map[y][x] == 'C')
-		td()->collectibles++;
+		td()->collect++;
 	else if (map[y][x] == 'E')
 		td()->exit_on = 0;
 	map[y][x] = '+';
@@ -55,6 +55,6 @@ void	flood_fill(void)
 	}
 	start_flooding(mapcopy, td()->x, td()->y);
 	ft_free_tab(mapcopy);
-	if (td()->exit_on || td()->collectibles != td()->collect_count)
+	if (td()->exit_on || td()->collect != td()->collectotal)
 		print_error("Error\nMap not feasible");
 }

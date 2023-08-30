@@ -6,13 +6,14 @@
 #    By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 18:36:54 by oroy              #+#    #+#              #
-#    Updated: 2023/08/30 11:26:18 by oroy             ###   ########.fr        #
+#    Updated: 2023/08/30 12:48:05 by oroy             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ********************************* VARIABLES ******************************** #
 
 NAME := so_long
+BONUS := so_long_bonus
 
 GLFW := -L/Users/$(USER)/.brew/opt/glfw/lib -lglfw
 
@@ -27,8 +28,18 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
 
 SRC_DIR := ./src
 OBJ_DIR := ./obj
-SRC := $(shell find $(SRC_DIR) -iname "*.c")
-OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+
+EXCLUDE_MAIN =	$(SRC_DIR)/main.c \
+				$(SRC_DIR)/key_hooks.c
+EXCLUDE_BONUS =	$(SRC_DIR)/main_bonus.c \
+				$(SRC_DIR)/key_hooks_bonus.c
+
+# SRC := $(shell find $(SRC_DIR) -iname "*.c")
+SRC_MAIN = $(filter-out $(EXCLUDE_BONUS), $(wildcard $(SRC_DIR)/*.c))
+OBJ_MAIN := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_MAIN))
+
+SRC_BONUS = $(filter-out $(EXCLUDE_MAIN), $(wildcard $(SRC_DIR)/*.c))
+OBJ_BONUS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_BONUS))
 
 CC := gcc
 CFLAGS := -Wextra -Wall -Werror -Wunreachable-code -Ofast
@@ -50,8 +61,8 @@ $(LIBFT_AR):
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(OBJ) $(LIBMLX_AR) $(LIBMLX_FLAGS) $(LIBFT_AR) $(HEADERS) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJ_MAIN)
+	@$(CC) $(OBJ_MAIN) $(LIBMLX_AR) $(LIBMLX_FLAGS) $(LIBFT_AR) $(HEADERS) -o $(NAME)
 
 $(OBJ_DIR):
 	@mkdir $@
@@ -62,14 +73,17 @@ clean:
 	@$(MK_C) $(LIBFT) clean
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS)
 	@$(MK_C) $(LIBFT) fclean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, libmlx, libft
+bonus: $(LIBMLX_AR) $(LIBFT_AR) $(BONUS)
 
-bonus: 
+$(BONUS): $(OBJ_DIR) $(OBJ_BONUS)
+	@$(CC) $(OBJ_BONUS) $(LIBMLX_AR) $(LIBMLX_FLAGS) $(LIBFT_AR) $(HEADERS) -o $(BONUS)
+
+.PHONY: all, clean, fclean, re, bonus
 
 # VALGRIND #
 

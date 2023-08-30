@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:36:03 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/26 22:18:28 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 16:17:55 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	place_items(char c, int x, int y, int px)
 	}
 	else
 	{
-		if ((x * y) % 2 == 1)
+		if ((x * y) % 3 == 1)
 			mlx_image_to_window(td()->mlx, ti()->grass, x * px, y * px);
 		else
 			mlx_image_to_window(td()->mlx, ti()->grass_2, x * px, y * px);
@@ -34,7 +34,10 @@ static void	place_items(char c, int x, int y, int px)
 		mlx_image_to_window(td()->mlx, ti()->light_r, x * px, y * px);
 	}
 	else if (c == 'E')
-		mlx_image_to_window(td()->mlx, ti()->station, x * px, y * px);
+	{
+		mlx_image_to_window(td()->mlx, ti()->station_on, x * px, y * px);
+		mlx_image_to_window(td()->mlx, ti()->station_off, x * px, y * px);
+	}
 }
 
 void	display_images(char **tab, int px)

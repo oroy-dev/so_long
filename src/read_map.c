@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:17:53 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/28 13:29:59 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 16:55:57 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ static char	*ft_strdup_join(char *str, char *gnl)
 
 static void	file_to_tab(int fd)
 {
+	char	**map;
 	char	*gnl;
 	char	*str;
-	
+
 	str = NULL;
 	gnl = get_next_line(fd);
 	td()->width = ft_strlen(gnl);
@@ -56,8 +57,28 @@ static void	file_to_tab(int fd)
 		td()->height++;
 		gnl = get_next_line(fd);
 	}
-	td()->map = ft_split(str, '\n');
+	map = ft_split(str, '\n');
+	td()->map = map;
 	ft_free(str);
+}
+
+static void	check_extension(char *file, char *ext)
+{
+	size_t	len;
+	size_t	i;
+
+	i = ft_strlen(ext);
+	len = ft_strlen(file);
+	while (i)
+	{
+		if (file[len - i] != *ext)
+		{
+			ft_putendl_fd("Error\nNot right file extension (.ber)", 2);
+			exit (EXIT_FAILURE);
+		}
+		ext++;
+		i--;
+	}
 }
 
 void	read_map(char *file)
@@ -65,6 +86,7 @@ void	read_map(char *file)
 	char	*path;
 	int		fd;
 
+	check_extension(file, ".ber");
 	path = ft_strjoin("./map/", file);
 	if (!path)
 	{
@@ -72,9 +94,9 @@ void	read_map(char *file)
 		exit (EXIT_FAILURE);
 	}
 	fd = open (path, O_RDONLY);
+	ft_free(path);
 	if (fd == -1)
 	{
-		ft_free(path);
 		fd = open (file, O_RDONLY);
 		if (fd == -1)
 		{

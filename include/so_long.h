@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:38:19 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/28 14:10:24 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 15:32:04 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 
 typedef struct s_data
 {
-	char	**map;
-	int		px;
-	int		x;
-	int		y;
-	int		width;
-	int		height;
-	int		player_on;
-	int		exit_on;
-	int		movetotal;
-	int		collectibles;
-	int		collect_count;
+	char		**map;
+	int			px;
+	int			x;
+	int			y;
+	int			width;
+	int			height;
+	int			player_on;
+	int			exit_on;
+	int			movetotal;
+	int			collect;
+	int			collectotal;
 	mlx_image_t	*currentdir;
-	mlx_t	*mlx;
+	mlx_t		*mlx;
 }	t_data;
 
 typedef struct s_img
@@ -45,14 +45,15 @@ typedef struct s_img
 	mlx_image_t	*train_l;
 	mlx_image_t	*train_r;
 	mlx_image_t	*tree;
-	mlx_image_t	*station;
+	mlx_image_t	*station_off;
+	mlx_image_t	*station_on;
 	mlx_image_t	*wagon_h;
 	mlx_image_t	*wagon_v;
 }	t_img;
 
 t_data	*td(void);
 t_img	*ti(void);
-void	check_collectibles_attainability(char **map);
+void	check_collect_attainability(char **map);
 void	check_if_map_possible(void);
 void	check_map_eligibility(char **map);
 void	display_images(char **tab, int px);
@@ -60,10 +61,10 @@ void	error(void);
 void	flood_fill(void);
 int		get_height(void);
 int		get_width(void);
-void	key_hooks(mlx_key_data_t keydata, void* param);
+void	key_hooks(mlx_key_data_t keydata, void *param);
 void	key_hooks_bonus(mlx_key_data_t keydata, void *param);
 void	load_images(void);
-void	loop_hook(void* param);
+void	loop_hook(void *param);
 void	malloc_check(void *ptr);
 void	mlx_error_check(void *ptr);
 void	move_character(char key);

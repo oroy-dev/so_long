@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:08:42 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/26 22:25:41 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 16:02:43 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	load_images(void)
 	ti()->train_f = get_image("./ressources/train/train_f.png");
 	ti()->train_l = get_image("./ressources/train/train_l.png");
 	ti()->train_r = get_image("./ressources/train/train_r.png");
-	ti()->station = get_image("./ressources/train/station.png");
+	ti()->station_off = get_image("./ressources/train/station_off.png");
+	ti()->station_on = get_image("./ressources/train/station_on.png");
 	ti()->tree = get_image("./ressources/train/tree.png");
 	ti()->wagon_h = get_image("./ressources/train/wagon_h.png");
 	ti()->wagon_v = get_image("./ressources/train/wagon_v.png");

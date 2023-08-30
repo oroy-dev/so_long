@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 16:09:46 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/26 22:36:33 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 15:24:53 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	check_map_items(void)
 {
 	if (!td()->player_on)
 		print_error("Error\nNo player found");
-	else if (!td()->collect_count)
+	else if (!td()->collectotal)
 		print_error("Error\nNo collectible found");
 	else if (!td()->exit_on)
 		print_error("Error\nNo exit found");
@@ -41,7 +41,7 @@ static void	check_map_char(char c, int row, int col)
 		td()->player_on = 1;
 	}
 	else if (c == 'C')
-		td()->collect_count++;
+		td()->collectotal++;
 	else if (c == 'E')
 	{
 		if (td()->exit_on)

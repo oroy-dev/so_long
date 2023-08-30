@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:42:12 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/30 11:23:08 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/30 17:23:50 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_data	*td(void)
 		td.player_on = 0;
 		td.exit_on = 0;
 		td.movetotal = 0;
-		td.collectibles = 0;
-		td.collect_count = 0;
+		td.collect = 0;
+		td.collectotal = 0;
 	}
 	return (&td);
 }
@@ -51,6 +51,8 @@ static void	init_character(int x, int y)
 
 int	main(int argc, char **argv)
 {
+	mlx_t	*mlx;
+
 	if (argc != 2)
 	{
 		ft_putstr_fd("Error\nMake sure to have 2 arguments precisely.\n", 2);
@@ -59,8 +61,9 @@ int	main(int argc, char **argv)
 	read_map(argv[1]);
 	check_map_eligibility(td()->map);
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-	td()->mlx = mlx_init(get_width(), get_height(), "so_long", true);
-	mlx_error_check(td()->mlx);
+	mlx = mlx_init(get_width(), get_height(), "so_long", true);
+	mlx_error_check(mlx);
+	td()->mlx = mlx;
 	load_images();
 	display_images(td()->map, td()->px);
 	init_character(td()->x * td()->px, td()->y * td()->px);
