@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:03:38 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/30 17:23:56 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/31 16:02:51 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	trigger_hook(char key, int x, int y, int pos)
 	else
 		mlx_image_to_window(td()->mlx, ti()->wagon_h, x * px, y * px);
 	ft_printf ("%i\n", ++td()->movetotal);
-	// mlx_put_string(td()->mlx, "Total Count", px, get_height());
+	display_movetotal_bonus(px);
 	move_character(key);
 }
 

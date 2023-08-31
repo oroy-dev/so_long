@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:42:12 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/30 17:08:03 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/31 17:18:33 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_data	*td(void)
 		td.movetotal = 0;
 		td.collect = 0;
 		td.collectotal = 0;
+		td.text = NULL;
 	}
 	return (&td);
 }
@@ -67,6 +68,7 @@ int	main(int argc, char **argv)
 	load_images();
 	display_images(td()->map, td()->px);
 	init_character(td()->x * td()->px, td()->y * td()->px);
+	display_movetotal_bonus(td()->px);
 	mlx_loop_hook(td()->mlx, loop_hook, td()->mlx);
 	mlx_key_hook(td()->mlx, &key_hooks_bonus, td()->mlx);
 	mlx_loop(td()->mlx);

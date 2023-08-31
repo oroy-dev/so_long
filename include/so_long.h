@@ -6,7 +6,7 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:38:19 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/30 15:32:04 by oroy             ###   ########.fr       */
+/*   Updated: 2023/08/31 16:02:30 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data
 	int			collect;
 	int			collectotal;
 	mlx_image_t	*currentdir;
+	mlx_image_t	*text;
 	mlx_t		*mlx;
 }	t_data;
 
@@ -53,11 +54,9 @@ typedef struct s_img
 
 t_data	*td(void);
 t_img	*ti(void);
-void	check_collect_attainability(char **map);
-void	check_if_map_possible(void);
 void	check_map_eligibility(char **map);
 void	display_images(char **tab, int px);
-void	error(void);
+void	display_movetotal_bonus(int px);
 void	flood_fill(void);
 int		get_height(void);
 int		get_width(void);
@@ -65,7 +64,6 @@ void	key_hooks(mlx_key_data_t keydata, void *param);
 void	key_hooks_bonus(mlx_key_data_t keydata, void *param);
 void	load_images(void);
 void	loop_hook(void *param);
-void	malloc_check(void *ptr);
 void	mlx_error_check(void *ptr);
 void	move_character(char key);
 void	print_error(char *msg);
