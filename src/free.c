@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add.c                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: olivierroy <olivierroy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 16:58:52 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/09 19:21:45 by oroy             ###   ########.fr       */
+/*   Created: 2024/12/09 19:19:56 by olivierroy        #+#    #+#             */
+/*   Updated: 2024/12/09 19:20:16 by olivierroy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-int	ft_add(int write_rtn, int nbr)
+void	ft_free(void *ptr)
 {
-	if (write_rtn == -1)
-		return (-1);
-	else
-		return (write_rtn + nbr);
+	if (ptr)
+	{
+		free (ptr);
+		ptr = NULL;
+	}
+}
+
+void	ft_free_tab(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+		{
+			free (tab[i]);
+			i++;
+		}
+		ft_free(tab);
+	}
 }

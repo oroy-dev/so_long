@@ -6,11 +6,11 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 11:48:01 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/11 17:59:32 by oroy             ###   ########.fr       */
+/*   Updated: 2023/11/30 13:04:04 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 char	*ft_strdup(const char *s1)
 {

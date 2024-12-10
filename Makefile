@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+         #
+#    By: olivierroy <olivierroy@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/05 18:36:54 by oroy              #+#    #+#              #
-#    Updated: 2023/09/05 15:37:02 by oroy             ###   ########.fr        #
+#    Updated: 2024/12/09 19:29:15 by olivierroy       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBMLX := ./lib/MLX42
 LIBMLX_AR := $(LIBMLX)/build/libmlx42.a
 LIBMLX_FLAGS := -ldl $(GLFW) -pthread -lm
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
+HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/inc
 
 SRC_DIR := ./src
 OBJ_DIR := ./obj

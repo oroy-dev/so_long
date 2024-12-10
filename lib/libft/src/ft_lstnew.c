@@ -6,11 +6,11 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 13:14:05 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/31 16:08:22 by oroy             ###   ########.fr       */
+/*   Updated: 2023/11/30 13:04:04 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 t_list	*ft_lstnew(void *content)
 {

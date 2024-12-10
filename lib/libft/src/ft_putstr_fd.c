@@ -6,11 +6,11 @@
 /*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:19:50 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/09 19:21:45 by oroy             ###   ########.fr       */
+/*   Updated: 2023/11/30 13:58:58 by oroy             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 int	ft_putstr_fd(char *s, int fd)
 {

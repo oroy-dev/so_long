@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oroy <oroy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: olivierroy <olivierroy@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 18:38:19 by oroy              #+#    #+#             */
-/*   Updated: 2023/08/31 16:02:30 by oroy             ###   ########.fr       */
+/*   Updated: 2024/12/09 19:25:09 by olivierroy       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "libft.h"
 # include "MLX42/MLX42.h"
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
@@ -58,6 +60,8 @@ void	check_map_eligibility(char **map);
 void	display_images(char **tab, int px);
 void	display_movetotal_bonus(int px);
 void	flood_fill(void);
+void	ft_free(void *ptr);
+void	ft_free_tab(char **tab);
 int		get_height(void);
 int		get_width(void);
 void	key_hooks(mlx_key_data_t keydata, void *param);
